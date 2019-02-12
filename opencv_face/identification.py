@@ -13,7 +13,7 @@ with open("pickles/face-labels.pickle", 'rb') as f:
 	og_labels = pickle.load(f)
 	labels = {v:k for k,v in og_labels.items()}
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(-1)
 
 while(True):
     # Capture frame-by-frame
@@ -27,7 +27,7 @@ while(True):
 
     	# recognize? deep learned model predict keras tensorflow pytorch scikit learn
     	id_, conf = recognizer.predict(roi_gray)
-    	print(labels[id_] + "일 확률: " + str(conf) + "%")
+    	print(labels[id_] + " : " + str(conf) + "%")
     	if conf>=4:
     		#print(5: #id_)
     		#print(labels[id_])
