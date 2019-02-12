@@ -1,5 +1,6 @@
 import face_recognition
 import cv2
+import time
 
 # This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
 # other example, but it includes some basic performance tweaks to make things run a lot faster:
@@ -36,10 +37,20 @@ face_locations = []
 face_encodings = []
 face_names = []
 process_this_frame = True
+pre = 0
 
 while True:
     # Grab a single frame of video
     ret, frame = video_capture.read()
+    # fps
+    cur = time.time()
+    sec = cur - pre
+    pre = cur
+ 
+    fps = 1/sec
+    fps_text = "FPS : " + str(fps)
+
+    cv2.putText(frame, fps_text, (0, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0))
 
     # Resize frame of video to 1/4 size for faster face recognition processing
     small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
